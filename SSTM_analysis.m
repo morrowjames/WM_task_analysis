@@ -1,3 +1,5 @@
+% Analaysis of SSTM working memory task
+% Copywrite James Morrow & Andrea Zdral 2017
 
 pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
 
