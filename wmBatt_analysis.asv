@@ -1,4 +1,4 @@
-% Copywrite James Morrow & Andrea Zdral 2017
+% Copywrite James Morrow & ANdr
 % To be used with SSTM_analysis.m.....
 % Participant files are to be labelled ID_TASK ie: Sub_01_SSTM.txt
 clear; close all; clc;
