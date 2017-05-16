@@ -14,3 +14,5 @@ w(1,:)=[]; % remove first cell as its a header and isnt needed
 s = 'success';
 
 tf = strcmp(w,s); % true/false. If cell = 'succes', print '1', else '0'.
+
+
