@@ -53,3 +53,9 @@ hh(hh==']') = [];
 hh(hh==',') = [];
 k{i} = str2num(hh);
 end
+
+%% test = reshape(in,[],2)  ###<-- that command makes the string of numbers into a nice table of 2 columns 
+%                                   and x amount of rows 
+
+
+
