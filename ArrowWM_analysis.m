@@ -1,8 +1,8 @@
 %Arrow task
 % Analaysis of SSTM working memory task
 % Copywrite James Morrow & Andrea Zdral 2017
-
-pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
+clear; clear all; clc
+pathout = '\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\arrow_span\';
 
 ID = {'001';};
 
@@ -19,10 +19,7 @@ s = 'success';
 
 tf = strcmp(w,s); % true/false. If cell = 'succes', print '1', else '0'.
 
-<<<<<<< HEAD
-totalCorr_ARROW = sum(tf(:,1)==1);
-=======
-totalCorr_ARROW = sum(tf(:,1)==1)/18*100;
+totalCorr_ANU = sum(tf(:,1)==1)/18*100;
 
 %% ##### ANL - 1 point per correct item, only for totally correct trials #####
 
@@ -32,8 +29,8 @@ outputA = g(tf);
 
 totalANL_ARROW = sum(outputA)./81*100;
 
-%% ##### 
-
+%% ##### PCL
+h = b.textdata(:,25);    
 n = b.textdata(:,24);
 k = cell(1,length(n) -1);
 for i = 1:length(k)
@@ -41,16 +38,31 @@ nn = n{i+1};
 nn(nn=='[') = [];
 nn(nn==']') = [];
 nn(nn==',') = [];
-k{i} = str2num(nn);
-end
+k{i} = str2num(nn); 
+pres_table = reshape(k{i},[],2);
 
-h = b.textdata(:,25);
-k = cell(1,length(h) -1);
-for i = 1:length(k)
+
+% h = b.textdata(:,25);
+% k = cell(1,length(h) -1);
+% i = 1:length(k)
 hh = h{i+1};
 hh(hh=='[') = [];
 hh(hh==']') = [];
 hh(hh==',') = [];
 k{i} = str2num(hh);
+probe_table = reshape(k{i},[],2);
+
+letssee = pres_table == probe_table;
+checkA = letssee(:,1);
+checkB= letssee(:,2);
+
+ans(i) = sum(checkA(checkB));
 end
->>>>>>> parent of b923d29... added reshape function as comment, so we knokw what to use in the future
+
+grand_total = sum(ans(1,:))
+totalPCL_ARROW = (grand_total/81)*100
+
+%% ###### PCU 
+
+
+
