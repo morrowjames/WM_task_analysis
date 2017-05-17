@@ -3,12 +3,10 @@
 
 pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
 
-%% ##### Calculate all fully correct trials #####
 subject = [ID{i,1},'_SSTM.txt'];
 a = dlmread(subject, '', 36, 0); %read in .txt file from line 37 downwards
 totalCorr_SSTM = sum(a(:,8)==2)./120*100; % calculates number of trials (out of 120) that were correct
-
-%% ##### Calculate percentage correct as groups (30 in total). Must get all trials correct in group to score a point ####
+    
 for z = 1:30
     [x,y]=find([a(:,9)]==z);
     
@@ -21,8 +19,7 @@ for z = 1:30
     totalANU_SSTM = sum(corrAns(1,:)==1)./30*100;
     
 end;
- 
-%% ##### Calculate score based on percentage correct in each block ie. 3 out of 4 correct = .75 ####
+    
 for idx = 1:30;
     logA = a(:,9) == idx; %extract trial of interest
     rowInt = a(:,8);
@@ -32,8 +29,7 @@ for idx = 1:30;
     answer(idx,1) = sum(logOutput)./length(logOutput);
     totalPCU_SSTM = sum(answer)./30*100;
     end;
-
-%% ##### 1 point per correcr trial in each block of trials but only if all trials are correct #####   
+    
 for z = 1:30
    [x,y]=find([a(:,9)]==z);
     
@@ -47,8 +43,6 @@ for z = 1:30
     
     end;
 
-%% ##### Put outputs in a struct and save #####
-    
 output.(ID{1,1}) = struct('total_SSTM',{totalCorr_SSTM,totalANU_SSTM,totalPCU_SSTM,totalANL_SSTM});
 
 save([pathout,ID{i,1},'_output_SSTM'],'output');

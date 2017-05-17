@@ -1,18 +1,15 @@
 %Arrow task
 % Analaysis of SSTM working memory task
 % Copywrite James Morrow & Andrea Zdral 2017
-clear; close all; clc;
 
-pathout = '\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\arrow_span';
+pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
 
 ID = {'001';};
- 
-%% ##### Calculate total percentage correct (ALSO ANU) #####
+
 for i = 1:size(ID,1)
     subject = [ID{i,1},'_ARROW.xlsx'];
     b = importdata(subject); % import .xlsx file
 end;
-
 
 w = b.textdata(:,26); % remove irrelevant data fields and keep column 25
 %w = w(~cellfun('isempty',w)); % if any cells are empty remove them
@@ -22,34 +19,4 @@ s = 'success';
 
 tf = strcmp(w,s); % true/false. If cell = 'succes', print '1', else '0'.
 
-totalCorr_ARROW = sum(tf(:,1)==1)/18*100;
-
-%% ##### ANL - 1 point per correct item, only for totally correct trials #####
-
-g = b.data(:,18); % remove irrelevant data fields and keep column 18
-
-outputA = g(tf);
-
-totalANL_ARROW = sum(outputA)./81*100;
-
-%% ##### 
-
-n = b.textdata(:,24);
-k = cell(1,length(n) -1);
-for i = 1:length(k)
-nn = n{i+1};
-nn(nn=='[') = [];
-nn(nn==']') = [];
-nn(nn==',') = [];
-k{i} = str2num(nn);
-end
-
-h = b.textdata(:,25);
-k = cell(1,length(h) -1);
-for i = 1:length(k)
-hh = h{i+1};
-hh(hh=='[') = [];
-hh(hh==']') = [];
-hh(hh==',') = [];
-k{i} = str2num(hh);
-end
+totalCorr_ARROW = sum(tf(:,1)==1);
