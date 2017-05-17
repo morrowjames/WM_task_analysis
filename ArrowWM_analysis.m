@@ -19,4 +19,38 @@ s = 'success';
 
 tf = strcmp(w,s); % true/false. If cell = 'succes', print '1', else '0'.
 
+<<<<<<< HEAD
 totalCorr_ARROW = sum(tf(:,1)==1);
+=======
+totalCorr_ARROW = sum(tf(:,1)==1)/18*100;
+
+%% ##### ANL - 1 point per correct item, only for totally correct trials #####
+
+g = b.data(:,18); % remove irrelevant data fields and keep column 18
+
+outputA = g(tf);
+
+totalANL_ARROW = sum(outputA)./81*100;
+
+%% ##### 
+
+n = b.textdata(:,24);
+k = cell(1,length(n) -1);
+for i = 1:length(k)
+nn = n{i+1};
+nn(nn=='[') = [];
+nn(nn==']') = [];
+nn(nn==',') = [];
+k{i} = str2num(nn);
+end
+
+h = b.textdata(:,25);
+k = cell(1,length(h) -1);
+for i = 1:length(k)
+hh = h{i+1};
+hh(hh=='[') = [];
+hh(hh==']') = [];
+hh(hh==',') = [];
+k{i} = str2num(hh);
+end
+>>>>>>> parent of b923d29... added reshape function as comment, so we knokw what to use in the future
