@@ -2,7 +2,7 @@
 % Analaysis of SSTM working memory task
 % Copywrite James Morrow & Andrea Zdral 2017
 clear; clear all; clc
-pathout = '\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\arrow_span\';
+pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
 
 ID = {'001';};
 
@@ -57,13 +57,15 @@ checkA = letssee(:,1);
 checkB= letssee(:,2);
 
 variable(i) = sum(checkA(checkB));
+
 end
 
-grand_total = sum(variable(1,:))
-totalPCL_ARROW = (grand_total/81)*100
+grand_total = sum(variable(1,:));
+totalPCL_ARROW = (grand_total/81)*100;
 
 %% ###### PCU 
 
+for 
     total_2(i) = sum(variable(i)/length(checkA))
     totalPCU_ARROW = total_2./18*100
 

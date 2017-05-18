@@ -1,10 +1,11 @@
 %Arrow task
 % Analaysis of SSTM working memory task
 % Copywrite James Morrow & Andrea Zdral 2017
-clear; clear all; clc
-pathout = '\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\arrow_span\';
+%clear; clear all; clc
+pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
+addpath = '\\ad.monash.edu\home\User077\morrowj\Desktop\GitHub\WM_task_analysis\';
 
-ID = {'001';};
+%ID = {'001';};
 
 for i = 1:size(ID,1)
     subject = [ID{i,1},'_ARROW.xlsx'];
@@ -57,13 +58,17 @@ checkA = letssee(:,1);
 checkB= letssee(:,2);
 
 variable(i) = sum(checkA(checkB));
+
+total_2(i) = sum(variable(i)/length(checkA));
+totalPCU_ARROW = sum(total_2)./18*100;
+
 end
 
-grand_total = sum(variable(1,:))
-totalPCL_ARROW = (grand_total/81)*100
+grand_total = sum(variable(1,:));
+totalPCL_ARROW = (grand_total/81)*100;
 
-%% ###### PCU 
+%% ######
 
-    total_2(i) = sum(variable(i)/length(checkA))
-    totalPCU_ARROW = total_2./18*100
+output.(ID{1,1}) = struct('total_SSTM_ARROW',{totalCorr_SSTM,totalANU_SSTM,totalPCU_SSTM,totalANL_SSTM,totalANL_ARROW,totalCorr_ANU,totalPCL_ARROW,totalPCU_ARROW});
 
+%save([pathout,ID{i,1},'_output_SSTM_ARROW'],'output');
