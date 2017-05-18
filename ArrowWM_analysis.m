@@ -56,13 +56,14 @@ letssee = pres_table == probe_table;
 checkA = letssee(:,1);
 checkB= letssee(:,2);
 
-ans(i) = sum(checkA(checkB));
+variable(i) = sum(checkA(checkB));
 end
 
-grand_total = sum(ans(1,:))
+grand_total = sum(variable(1,:))
 totalPCL_ARROW = (grand_total/81)*100
 
 %% ###### PCU 
 
-
+    total_2(i) = sum(variable(i)/length(checkA))
+    totalPCU_ARROW = total_2./18*100
 
