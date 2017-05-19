@@ -1,10 +1,8 @@
 % Analaysis of SSTM working memory task
 % Copywrite James Morrow & Andrea Zdral 2017
 
-pathout = '\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\';
-
-subject = [ID{i,1},'_SSTM.txt'];
-a = dlmread(subject, '', 36, 0); %read in .txt file from line 37 downwards
+subject_SSTM = [ID{i,1},'_SSTM.txt'];
+a = dlmread(subject_SSTM, '', 36, 0); %read in .txt file from line 37 downwards
 totalCorr_SSTM = sum(a(:,8)==2)./120*100; % calculates number of trials (out of 120) that were correct
     
 for z = 1:30
@@ -43,6 +41,6 @@ for z = 1:30
     
     end;
 
-output.(ID{1,1}) = struct('total_SSTM',{totalCorr_SSTM,totalANU_SSTM,totalPCU_SSTM,totalANL_SSTM});
-
-save([pathout,ID{i,1},'_output_SSTM'],'output');
+% output.(ID{i,1}) = struct('total_SSTM',{totalCorr_SSTM,totalANU_SSTM,totalPCU_SSTM,totalANL_SSTM});
+% 
+% save([pathout,ID{i,1},'_output_SSTM'],'output');
