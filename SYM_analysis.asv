@@ -1,5 +1,6 @@
 addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
-clc; clear; clear all;
+
+clc; clear;
 ID = {'Sub_01';};
 
 for i = 1:size(ID,1)
@@ -7,90 +8,32 @@ for i = 1:size(ID,1)
     b = importdata(subject); % import .xlsx file
 end;
 
-w = b.textdata(:,25); % remove irrelevant data fields and keep column 25
-w = w(~cellfun('isempty',w)); % if any cells are empty remove them
-w(1,:)=[]; % remove first cell as its a header and isnt needed
+% Import SYM data from xls file
+[~, ~, SYM] = xlsread('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan\01_SYM.xlsx','00001justincase','A2:AM100');
+SYM(cellfun(@(x) ~isempty(x) && isnumeric(x) && isnan(x),SYM)) = {''};
 
-s = 'success';
+% Create a loop that counts the number of successes for each trial
+% SYM is the output from symmetry task
+for symLength = 1:size(SYM,1) % Loop over the cell structure rows
+    if ~isempty(SYM{symLength,39}) % Check if cell is empty. If not empty, proceed.
+        trialSuccess = []; % Create an empty vector called trialSuccess
+        for trialNum = 1:SYM{symLength,30} % Create a loop for the number of catch trials per trial
+            if strcmp('success',SYM{symLength-trialNum,25}) % Check if catch trial was a success
+                trialSuccess(trialNum,1) = 1; % If yes, code a 1
+            else
+                trialSuccess(trialNum,1) = 0; % If no, code a 0
+            end
+        end
+        output(SYM{symLength,39},1) = sum(trialSuccess)./size(trialSuccess,1); % Calculate the ratio of correct to incorrect catch trials for each trial
+    end
+end
 
-tf = strcmp(w,s); % true/false. If cell = 'succes', print '1', else '0'.
-
-totalSYM_Corr = sum(tf(:,1))/81*100;
-
-for i = 1:2;
-a(i,1) = 1;
-end;
-
-for i = 4:5
-    a(i,1) = 2;
-end;
-
-for i = 7:8;
-a(i,1) = 3;
-end;
-
-for i = 10:12;
-    a(i,1) = 4
-end;
-
-for i = 14:16;
-l(i,1) = 5
-end;
-
-for i = 18:20;
-    l(i,1) = 6
-end;
-
-for i = 22:25;
-l(i,1) = 7
-end;
-
-for i = 27:30;
-    l(i,1) = 8 
-end;
-
-for i = 32:35;
-l(i,1) = 9
-end;
-
-for i = 37:41;
-   l(i,1) = 10
-end;
-
-for i = 43:47;
-l(i,1) = 11
-end;
-
-for i = 49:53;
-    l(i,1) = 12
-end;
-
-for i = 55:60;
-l(i,1) = 13
-end;
-
-for i = 62:67;
-    l(i,1) = 14
-end;
-
-for i = 69:75;
-l(i,1) = 15
-end;
-
-for i = 77:83;
-    l(i,1) = 16
-end;
-
-for i = 85:91;
-    l(i,1) = 17
-end;
-
-for i = 93:99;
-    l(i,1) = 18
-end;
-
-
-l = b.data(:,18); % remove irrelevant data fields and keep column 25
-% l = l(~cellfun('isempty',l)); % if any cells are empty remove them
-% l(1,:)=[]; % remove first cell as its a header and isnt needed
-
+% for idx = 1:18
+%     logA = l(:,1) == idx; %extract trial of interest
+%     rowInt = z(:,1);
+%     outputA = rowInt(logA);
+%     
+%     logOutput = outputA == 1;
+%     answer(idx,1) = sum(logOutput)./length(logOutput);
+%     %totalPCU_SSTM = sum(answer)./30*100;
+% end

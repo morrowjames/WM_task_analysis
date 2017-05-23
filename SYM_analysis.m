@@ -1,6 +1,7 @@
-addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
+%addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
+addpath = ('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan');
 clc; clear;
-ID = {'Sub_01';};
+ID = {'01';};
 
 for i = 1:size(ID,1)
     subject = [ID{i,1},'_SYM.xlsx'];
