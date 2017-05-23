@@ -1,7 +1,7 @@
-%addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
-addpath = ('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan');
+addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
+% addpath = ('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan');
 clc; clear;
-ID = {'01';};
+ID = {'Sub_01';};
 
 for i = 1:size(ID,1)
     subject = [ID{i,1},'_SYM.xlsx'];
@@ -9,7 +9,7 @@ for i = 1:size(ID,1)
 end;
 
 % Import SYM data from xls file
-[~, ~, SYM] = xlsread('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan\01_SYM.xlsx','00001justincase','A2:AM100');
+[~, ~, SYM] = xlsread('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\01_SYM.xlsx','00001justincase','A2:AM100');
 SYM(cellfun(@(x) ~isempty(x) && isnumeric(x) && isnan(x),SYM)) = {''};
 
 % Create a loop that counts the number of successes for each trial
@@ -28,12 +28,25 @@ for symLength = 1:size(SYM,1) % Loop over the cell structure rows
     end
 end
 
-% for idx = 1:18
-%     logA = l(:,1) == idx; %extract trial of interest
-%     rowInt = z(:,1);
-%     outputA = rowInt(logA);
-%     
-%     logOutput = outputA == 1;
-%     answer(idx,1) = sum(logOutput)./length(logOutput);
-%     %totalPCU_SSTM = sum(answer)./30*100;
-% end
+q = b.data(:,38);
+
+for x = 1:18
+    if output(x,1) >= .85;
+    
+    else
+    [a,j] = find(q(:,1) == x);
+    SYM(a,:) = deal({NaN}); % remove row
+    end
+end;
+
+sf_count = SYM(:,37); % remove irrelevant data fields and keep column 25
+%w = w(~cellfun('isempty',w)); % if any cells are empty remove them
+%w(1,:)=[]; % remove first cell as its a header and isnt needed
+
+s = 'success';
+
+tf = strcmp(sf_count,s); % true/false. If cell = 'succes', print '1', else '0'.
+
+ANU_SYM = sum(tf(:,1)==1)/18*100;
+
+

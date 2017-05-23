@@ -1,5 +1,5 @@
 addpath = ('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data');
-
+% addpath = ('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan');
 clc; clear;
 ID = {'Sub_01';};
 
@@ -9,7 +9,7 @@ for i = 1:size(ID,1)
 end;
 
 % Import SYM data from xls file
-[~, ~, SYM] = xlsread('\\ad.monash.edu\home\User046\azdr0001\Desktop\WM_DATA\symmetryspan\01_SYM.xlsx','00001justincase','A2:AM100');
+[~, ~, SYM] = xlsread('\\ad.monash.edu\home\User077\morrowj\Desktop\Andrea_data\01_SYM.xlsx','00001justincase','A2:AM100');
 SYM(cellfun(@(x) ~isempty(x) && isnumeric(x) && isnan(x),SYM)) = {''};
 
 % Create a loop that counts the number of successes for each trial
@@ -28,12 +28,11 @@ for symLength = 1:size(SYM,1) % Loop over the cell structure rows
     end
 end
 
-% for idx = 1:18
-%     logA = l(:,1) == idx; %extract trial of interest
-%     rowInt = z(:,1);
-%     outputA = rowInt(logA);
-%     
-%     logOutput = outputA == 1;
-%     answer(idx,1) = sum(logOutput)./length(logOutput);
-%     %totalPCU_SSTM = sum(answer)./30*100;
-% end
+for x = 1:18
+    if output(x,1) >= .85;
+    
+    else
+    [a,j] = find(q{:,1} == x);
+    end
+end
+
